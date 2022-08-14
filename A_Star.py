@@ -4,6 +4,7 @@ Place start, end node (first 2 spots left clicked)
 Place barriers (spots left clicked after start and end node declared (black))
 Hit spacebar to start pathfinding algorithm
 Hit c to clear grid (after algo completes)
+test new GitHub token
 """
 
 import pygame
