@@ -7,6 +7,8 @@ Hit c to clear grid (after algo completes)
 test new GitHub token
 """
 
+from calendar import c
+from cgitb import grey
 import pygame
 import math
 from queue import PriorityQueue
@@ -15,16 +17,16 @@ WIDTH = 800
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("A* Pathfinding Algo")
 
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 255, 0)
-YELLOW = (255, 255, 0)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-PURPLE = (128, 0, 128)
-ORANGE = (255, 165, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+DARK_RED = (139, 0, 0)
+DARK_GREEN = (24, 136, 72)
+BLUE = (0, 0, 255)
+PURPLE = (177, 156, 217)
+DARK_RED = (139, 0, 0)
 GREY = (128, 128, 128)
-TURQUOISE = (64, 224, 208)
 
 class Spot:
     def __init__(self, row, col, width, total_rows):
@@ -50,16 +52,19 @@ class Spot:
         return self.color == BLACK
 
     def is_start(self):
-        return self.color == ORANGE
+        return self.color == DARK_GREEN
     
     def is_end(self):
-        return self.color == TURQUOISE
+        return self.color == DARK_RED
     
     def reset(self):
         self.color = WHITE
 
     def make_start(self):
-        self.color = ORANGE
+        self.color = DARK_GREEN
+
+    def make_end(self):
+        self.color = DARK_RED
     
     def make_closed(self):
         self.color = RED
@@ -69,9 +74,6 @@ class Spot:
     
     def make_barrier(self):
         self.color = BLACK
-    
-    def make_end(self):
-        self.color = TURQUOISE
 
     def make_path(self):
         self.color = PURPLE
@@ -205,7 +207,7 @@ def main(win, width):
     end = None
 
     run = True
-    started = False
+    # started = False
 
     while run:
         draw(win, grid, ROWS, width)
@@ -245,6 +247,7 @@ def main(win, width):
                             spot.update_neighbors(grid)
 
                     algorithm(lambda: draw(win, grid, ROWS, width), grid, start, end)
+                    start.make_start()
 
                 if event.key == pygame.K_c:
                     start = None
