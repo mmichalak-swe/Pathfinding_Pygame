@@ -207,7 +207,6 @@ def main(win, width):
     end = None
 
     run = True
-    # started = False
 
     while run:
         draw(win, grid, ROWS, width)
@@ -253,6 +252,12 @@ def main(win, width):
                     start = None
                     end = None
                     grid = make_grid(ROWS, width)
+
+                if event.key == pygame.K_r:
+                    for row in grid:
+                        for spot in row:
+                            if spot.is_closed():
+                                spot.reset()
 
     pygame.quit()
 
