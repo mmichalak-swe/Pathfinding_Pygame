@@ -51,6 +51,9 @@ class Spot:
     def is_barrier(self):
         return self.color == BLACK
 
+    def is_path(self):
+        return self.color == PURPLE
+
     def is_start(self):
         return self.color == DARK_GREEN
     
@@ -256,7 +259,7 @@ def main(win, width):
                 if event.key == pygame.K_r:
                     for row in grid:
                         for spot in row:
-                            if spot.is_closed():
+                            if spot.is_closed() or spot.is_open() or spot.is_path():
                                 spot.reset()
 
     pygame.quit()
