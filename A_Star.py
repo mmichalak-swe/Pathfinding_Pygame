@@ -25,6 +25,7 @@ BLUE = (0, 0, 255)
 PURPLE = (177, 156, 217)
 DARK_RED = (139, 0, 0)
 GREY = (128, 128, 128)
+YELLOW = (255, 255, 0)
 
 class Spot:
     def __init__(self, row, col, width, total_rows):
@@ -50,7 +51,7 @@ class Spot:
         return self.color == BLACK
 
     def is_path(self):
-        return self.color == PURPLE
+        return self.color == PURPLE or self.color == YELLOW
 
     def is_start(self):
         return self.color == DARK_GREEN
@@ -267,6 +268,15 @@ def main(win, width):
                         for spot in row:
                             if spot.is_barrier():
                                 spot.reset()
+
+                if event.key == pygame.K_p:
+                    for row in grid:
+                        for spot in row:
+                            if spot.is_path():
+                                if spot.color == PURPLE:
+                                    spot.color = YELLOW
+                                elif spot.color == YELLOW:
+                                    spot.color = PURPLE
 
     pygame.quit()
 
