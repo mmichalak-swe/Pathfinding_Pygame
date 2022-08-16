@@ -244,6 +244,8 @@ def main(win, width):
                 if event.key == pygame.K_SPACE and start and end:
                     for row in grid:
                         for spot in row:
+                            if spot.is_closed() or spot.is_open() or spot.is_path():
+                                spot.reset()
                             spot.update_neighbors(grid)
 
                     algorithm(lambda: draw(win, grid, ROWS, width), grid, start, end)
