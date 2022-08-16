@@ -8,9 +8,7 @@ test new GitHub token
 """
 
 from calendar import c
-from cgitb import grey
 import pygame
-import math
 from queue import PriorityQueue
 
 WIDTH = 800
@@ -260,6 +258,12 @@ def main(win, width):
                     for row in grid:
                         for spot in row:
                             if spot.is_closed() or spot.is_open() or spot.is_path():
+                                spot.reset()
+
+                if event.key == pygame.K_b:
+                    for row in grid:
+                        for spot in row:
+                            if spot.is_barrier():
                                 spot.reset()
 
     pygame.quit()
